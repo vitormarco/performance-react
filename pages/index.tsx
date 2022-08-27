@@ -7,6 +7,13 @@ type Results = {
   data: any[];
 };
 
+type Result = {
+  id: number;
+  price: number;
+  title: string;
+  priceFormatted: string;
+};
+
 const Home: NextPage = () => {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState<Results>({
@@ -20,7 +27,7 @@ const Home: NextPage = () => {
     if (!search.trim()) return;
 
     const response = await fetch(`http://localhost:3333/products?q=${search}`);
-    const data = await response.json();
+    const data: Result[] = await response.json();
     const formatter = new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL",
@@ -33,7 +40,7 @@ const Home: NextPage = () => {
       priceFormatted: formatter.format(product.price),
     }));
 
-    const totalPrice = data.reduce((total, product) => {
+    const totalPrice = data.reduce((total: number, product) => {
       return total + product.price;
     }, 0);
 
