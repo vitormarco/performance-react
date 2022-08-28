@@ -33,14 +33,14 @@ export const SearchResults = ({
     <div>
       <h2>{totalPrice}</h2>
 
-      <List
+      {/* <List
         height={300}
         rowHeight={30}
         width={900}
         overscanRowCount={5}
         rowCount={results.length}
         rowRenderer={rowRenderer}
-      />
+      /> */}
     </div>
   );
 };
